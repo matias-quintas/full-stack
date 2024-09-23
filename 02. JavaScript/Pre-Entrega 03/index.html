@@ -4,8 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pre-Entrega 03</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/json-products.js" defer></script>
+    <script src="./js/main.js" defer></script>
 </head>
 <body>
-    
+    <div>
+        <h2> Carrito de Ecommerce</h2>
+        
+        
+        <section id="secProd">
+            <h2>Listado de productos</h2>
+            <select name="filterProducts" id="filterProducts">
+                <option value="aToZ">A-Z</option>
+                <option value="zToA">Z-A</option>
+                <option value="highCost">Mayor Precio</option>
+                <option value="lowCost">Menor Precio</option>
+            </select>
+            <div id="productos"><!--Area to insert JSON Products--></div>
+        </section>
+    </div>
 </body>
 </html>

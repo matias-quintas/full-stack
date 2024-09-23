@@ -1,0 +1,37 @@
+body, body * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#secProd{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 40px;
+}
+
+#productos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.producto{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid rgba(0, 0,0, 0.5);
+    border-radius: 16px;
+    min-width: fit-content;
+    gap: 16px;
+}
+
+.producto img {
+    max-height: 50px;
+    object-fit: contain;
+}
