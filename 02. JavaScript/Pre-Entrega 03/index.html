@@ -10,17 +10,22 @@
 </head>
 <body>
     <div>
-        <h2> Carrito de Ecommerce</h2>
+        <section id="secCarrito">
+            <h2> Carrito de Ecommerce</h2>
+        </section>
+        
         
         
         <section id="secProd">
-            <h2>Listado de productos</h2>
-            <select name="filterProducts" id="filterProducts">
-                <option value="aToZ">A-Z</option>
-                <option value="zToA">Z-A</option>
-                <option value="highCost">Mayor Precio</option>
-                <option value="lowCost">Menor Precio</option>
-            </select>
+            <div class="titulo">
+                <h2>Listado de productos</h2>
+                <select name="filterProducts" id="filterProducts">
+                    <option value="aToZ">A-Z</option>
+                    <option value="zToA">Z-A</option>
+                    <option value="highCost">Mayor Precio → Menor Precio</option>
+                    <option value="lowCost">Menor Precio → Mayor Precio</option>
+                </select>
+            </div>
             <div id="productos"><!--Area to insert JSON Products--></div>
         </section>
     </div>

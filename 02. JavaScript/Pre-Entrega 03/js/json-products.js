@@ -4,7 +4,7 @@ const jsonProducts =
         {
             "SKU": "BYW-001",
             "Img": "https://cdn-icons-png.flaticon.com/512/679/679720.png",
-            "Title": "My Test Product 01",
+            "Title": "Camisa negra",
             "Excerpt": "This is a short description...",
             "Description": "This is an extensive description about my product and how better work for my clients.",
             "Price": 68,
@@ -13,7 +13,7 @@ const jsonProducts =
         {
             "SKU": "BYW-002",
             "Img": "https://cdn-icons-png.flaticon.com/512/679/679720.png",
-            "Title": "My Test Product 02",
+            "Title": "Remera manga larga",
             "Excerpt": "This is a short description...",
             "Description": "This is an extensive description about my product and how better work for my clients.",
             "Price": 108,
@@ -22,7 +22,7 @@ const jsonProducts =
         {
             "SKU": "BYW-003",
             "Img": "https://cdn-icons-png.flaticon.com/512/679/679720.png",
-            "Title": "My Test Product 03",
+            "Title": "Camisa celeste manga corta",
             "Excerpt": "This is a short description...",
             "Description": "This is an extensive description about my product and how better work for my clients.",
             "Price": 64,
@@ -31,7 +31,7 @@ const jsonProducts =
         {
             "SKU": "BYW-004",
             "Img": "https://cdn-icons-png.flaticon.com/512/679/679720.png",
-            "Title": "My Test Product 04",
+            "Title": "Jean de campo",
             "Excerpt": "This is a short description...",
             "Description": "This is an extensive description about my product and how better work for my clients.",
             "Price": 318,
@@ -40,7 +40,7 @@ const jsonProducts =
         {
             "SKU": "BYW-005",
             "Img": "https://cdn-icons-png.flaticon.com/512/679/679720.png",
-            "Title": "My Test Product 05",
+            "Title": "Short de football",
             "Excerpt": "This is a short description...",
             "Description": "This is an extensive description about my product and how better work for my clients.",
             "Price": 300,
