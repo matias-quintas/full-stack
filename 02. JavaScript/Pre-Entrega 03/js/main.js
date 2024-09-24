@@ -1,10 +1,37 @@
-function main() 
-{
+function main() {
     const verProductos = JSON.parse(jsonProducts);
-
     let divProductos = document.getElementById('productos');
-
+    let secCarrito = document.getElementById('secCarrito');
     let verCarrito = JSON.parse(localStorage.getItem('verCarrito')) || [];
+
+    function actualizarCarrito() {
+        if (verCarrito.length === 0) {
+            secCarrito.innerHTML += '<p>El carrito está vacío</p>';
+            return;
+        }
+
+        verCarrito.forEach((producto, i) => {
+            secCarrito.innerHTML += (`
+                <div class="producto-carrito">
+                    <img src="${producto.Img}">
+                    <h3 class="titulo">${producto.Title}</h3>
+                    <span class="precio">$${producto.Price}</span>
+                    <span class="sku">SKU: ${producto.SKU}</span>
+                    <button id="remove${i}" class="removeFromCart" type="button">X</button>
+                </div>
+            `);
+        });
+
+        const botonesRemove = document.getElementsByClassName("removeFromCart");
+        Array.from(botonesRemove).forEach((button, i) => {
+            button.addEventListener("click", function () {
+                verCarrito.splice(i, 1);
+                localStorage.setItem('verCarrito', JSON.stringify(verCarrito));
+                actualizarCarrito();
+                location.reload();
+            });
+        });
+    }
 
     verProductos.forEach((producto, i) => {
         if (producto.Discount != 0) {
@@ -39,16 +66,14 @@ function main()
     Array.from(botonesCart).forEach((button, i) => {
         button.addEventListener("click", function () {
             const productoSeleccionado = verProductos[i];
-
             verCarrito.push(productoSeleccionado);
-
             localStorage.setItem('verCarrito', JSON.stringify(verCarrito));
-
-            console.log("Producto añadido:", productoSeleccionado);
-            console.log("Carrito actual:", verCarrito);
+            actualizarCarrito();
+            location.reload();
         });
     });
-    console.log(Array.from(botonesCart))
+
+    actualizarCarrito();
 }
 
 main();
