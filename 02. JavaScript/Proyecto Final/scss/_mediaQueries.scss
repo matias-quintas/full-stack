@@ -1,0 +1,169 @@
+@media only screen and (max-width: 1200px) {
+  main {
+    .section{
+      width: 90%;
+      .cardGroup {
+        .card:last-child, .card:nth-last-child(2){
+          display: none;
+        }
+      }
+    }
+  }
+  
+    .formSection{
+      width: 80%;
+      .formDiv{
+        .imgForm {
+          display: none;
+        }
+        .form {
+          min-width: 100%;
+        }
+      }
+    }
+    
+    .ftr {
+      .ftrContent{
+        width: 90%;
+        .fColPosition {
+          width: 33.33%;
+          padding-right: 5%;
+        }
+      } 
+    }
+  }
+
+@media only screen and (max-width: 1000px) {
+  .banner{
+    img {
+      display: none;
+    }
+  }
+  .mailTel {
+    a{
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    .logoContainer{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 5%;
+      .logoContainerDiv{
+        text-align: left;
+        img {
+          max-width: 100%;
+          height: 80px;
+        }
+      }
+      .hMenu{
+        display: block;
+        img {
+          width: 30px;
+        }
+      }
+    }
+  }
+  main {
+    .section{
+      width: 90%;
+      .cardGroup {
+        flex-direction: column;
+        .card {
+          margin-bottom: 20px;
+        }
+        .card:last-child, .card:nth-last-child(2){
+          display: block;
+        }
+      }
+    }
+  }
+  .stickyContainer{
+    position: relative;
+    display: none;
+  }
+  #formID {
+    .formDesc{
+      margin: 10px 0;
+    }
+    .inputsDiv {
+      flex-direction: column;
+      .formInputs {
+        width: auto;
+        box-sizing: border-box;
+        margin: 10px 0;
+      }
+    }
+  }
+  .ftr{
+    .ftrContent{
+      .ftrDesc{
+        flex-direction: column;
+        padding-bottom: 0;
+        .fColPosition {
+          width: 100%;
+          padding: 0;
+          margin-bottom: 25px;
+          .socialIcons {
+            width: 250px;
+          }
+         
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 575px){
+  
+  main {
+    .section{
+      .sectionTitle{
+        h2 {
+          font-size: 20px;
+        }
+        a{
+          margin-left: 10px;
+        }
+      }
+      .cardGroup {
+        .card{
+          margin: 10px 0;
+        }
+      }
+      
+    }
+  }
+  .header {
+    .logoContainer{
+      .logoContainerDiv{
+        img {
+          height: 70px;
+        }
+      }
+    }
+  }
+  .formSection {
+    padding: 0;
+    width: 100%;
+    margin-bottom: -60px;
+    .formDiv{
+      box-shadow: none;
+      border-radius: 0;
+      #formID {
+        padding: 10%;
+      }
+    }
+  }
+  .ftrDesc{
+    .fColPosition {
+      display: flex;
+      flex-direction: column;
+    }  
+  }
+}

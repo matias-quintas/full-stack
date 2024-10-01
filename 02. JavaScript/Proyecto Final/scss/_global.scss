@@ -1,0 +1,44 @@
+// Var Colors
+$white: #ffffff;
+$grey: #e5e5e5;
+$dark-grey: #212529;
+$black: #000000;
+$yellow: #fca311;
+$light-blue: #238dc1;
+$blue: #003057;
+$dark-blue: #001c38;
+$darkest-blue: #001224;
+
+// Global Styles
+$max-width: 1200px;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: $grey;
+  margin: 0;
+  padding: 0;
+  a {
+    text-decoration: none;
+    color: $dark-grey;
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.maxWidth {
+  width: 100%;
+  max-width: $max-width;
+}
+
+h2 {
+  font-size: 26px;
+  color: $dark-grey;
+}
