@@ -1,5 +1,5 @@
 let actionMenuButton = document.querySelector(".hbImg");
-let navSection = document.querySelector(".menuMobile");
+let navSection = document.getElementsByClassName(".menuMobile");
 let actionExitButton = document.querySelector(".menuMobileContainer");
 
 function mostrarNav () {
