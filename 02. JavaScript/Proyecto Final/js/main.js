@@ -2,275 +2,97 @@ function cl(something) {
     console.log(something);
 }
 
-function main() {
-    for (const element of document.getElementsByClassName('section')) {
-        switch (element.id) {
-            case "teclados": 
-                for (let i = 0; i < chargeJSON().length; i++) {
-                    if (chargeJSON()[i].category == "electric-keyboards") {
-                        if (chargeJSON()[i].off > 0) {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p><span class="discount">${chargeJSON()[i].off}% OFF</span> ${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        } else {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p>${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        }
-                    }
-                }
-                break;
-            case "pianos":
-                for (let i = 0; i < chargeJSON().length; i++) {
-                    if (chargeJSON()[i].category == "electric-pianos") {
-                        if (chargeJSON()[i].off > 0) {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p><span class="discount">${chargeJSON()[i].off}% OFF</span> ${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        } else {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p>${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        }
-                    }
-                }
-                break;
-            case "synthes":
-                for (let i = 0; i < chargeJSON().length; i++) {
-                    if (chargeJSON()[i].category == "synths") {
-                        if (chargeJSON()[i].off > 0) {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p><span class="discount">${chargeJSON()[i].off}% OFF</span> ${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        } else {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p>${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        }
-                    }
-                }
-                break;
-            case "amplis":
-                for (let i = 0; i < chargeJSON().length; i++) {
-                    if (chargeJSON()[i].category == "amplis") {
-                        if (chargeJSON()[i].off > 0) {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p><span class="discount">${chargeJSON()[i].off}% OFF</span> ${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        } else {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p>${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        }
-                    }
-                }
-                break;
-            case "extras":
-                for (let i = 0; i < chargeJSON().length; i++) {
-                    if (chargeJSON()[i].category == "accesories") {
-                        if (chargeJSON()[i].off > 0) {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p><span class="discount">${chargeJSON()[i].off}% OFF</span> ${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        } else {
-                            element.lastElementChild.innerHTML += `
-                            <div class="card">
-                                <a href="${chargeJSON()[i].refer_link}" target="_blank">
-                                    <div class="productImgBox">
-                                    <img src="${chargeJSON()[i].img}"
-                                        alt="${chargeJSON()[i].title}">
-                                    </div>
-                                    <div class="productContent">
-                                    <div class="productTitle">
-                                        <p>${chargeJSON()[i].title}</p>
-                                    </div>
-                                    <div class="productDesc">
-                                        <p>${chargeJSON()[i].description}</p>
-                                    </div>
-                                    <div class="price">
-                                        <p>${chargeJSON()[i].price} €</p>
-                                    </div>
-                                    </div>
-                                </a>
-                            </div>
-                        `
-                        }
-                    }
-                }
-                break;
-            default: cl("error");
-                break;
-        }
+function chargeJSON() {
+    if (typeof jsonProducts !== 'undefined') {
+        return JSON.parse(jsonProducts);
     }
-    
+    throw new Error('jsonProducts is not defined');
 }
 
-function chargeJSON(products) {
-    products = JSON.parse(jsonProducts);
-    return products
+function renderProductCard(element, product) {
+    let productHtml = `
+    <div class="card">
+        <a href="${product.refer_link}" target="_blank">
+            <div class="productImgBox">
+                <img src="${product.img}" alt="${product.title}">
+            </div>
+            <div class="productContent">
+                <div class="productTitle">
+                    <p>${product.title}</p>
+                </div>
+                <div class="productDesc">
+                    <p>${product.description}</p>
+                </div>
+                <div class="price">`; // Cierre de comillas corregido
+
+    if (product.off > 0) {
+        productHtml += `
+                    <p><span class="final-price">${parseFloat(product.price).toFixed(2)} €</span> <span class="discount">${product.off}% OFF</span></p>`; // Formateo del precio
+    } else {
+        productHtml += `
+                    <p>${parseFloat(product.price).toFixed(2)} €</p>`; // Formateo del precio
+    }
+
+    productHtml += `
+                </div>
+            </div>
+        </a>
+    </div>`;
+
+    if (element.lastElementChild) {
+        element.lastElementChild.innerHTML += productHtml;
+    } else {
+        console.error(`No lastElementChild found for section: ${element.id}`);
+    }
+}
+
+
+function setupHamburgerMenu() {
+    const actionMenuButton = document.querySelector(".hbImg");
+    const navSection = document.querySelector(".menuMobile");
+    const actionExitButton = document.querySelector(".menuMobileContainer");
+
+    function mostrarNav() {
+        navSection.style.display = "block";
+    }
+
+    function closeNavBar() {
+        navSection.style.display = "none";
+    }
+
+    actionMenuButton.onclick = mostrarNav;
+    actionExitButton.onclick = closeNavBar;
+}
+
+function main() {
+    let products;
+    try {
+        products = chargeJSON();
+    } catch (error) {
+        console.error(error.message);
+        return;
+    }
+    const sections = document.getElementsByClassName('section');
+    const categoryMap = {
+        teclados: "electric-keyboards",
+        pianos: "electric-pianos",
+        synthes: "synths",
+        amplis: "amplis",
+        extras: "accessories"
+    };
+    for (const element of sections) {
+        const category = categoryMap[element.id];
+        if (!category) {
+            console.error(`Unknown section ID: ${element.id}`);
+            continue;
+        }
+        for (const product of products) {
+            if (product.category === category) {
+                renderProductCard(element, product);
+            }
+        }
+    }
+    setupHamburgerMenu();
 }
 
 main();
-

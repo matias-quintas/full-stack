@@ -185,7 +185,7 @@ const jsonProducts = `[
       "price": 21.99,
       "off": 51,
       "refer_link": "https://amzn.to/3KCtLlY",
-      "category": "accesories",
+      "category": "accessories",
       "img": "https://m.media-amazon.com/images/I/71ih771l5XL._AC_SL1500_.jpg"
     },
     {
@@ -194,7 +194,7 @@ const jsonProducts = `[
       "price": 39.99,
       "off": 11,
       "refer_link": "https://amzn.to/3nZJj9Q",
-      "category": "accesories",
+      "category": "accessories",
       "img": "https://m.media-amazon.com/images/I/81Rqe6AV68L._AC_SL1500_.jpg"
     },
     {
@@ -203,7 +203,7 @@ const jsonProducts = `[
       "price": 51.44,
       "off": 0,
       "refer_link": "https://amzn.to/3ralNsR",
-      "category": "accesories",
+      "category": "accessories",
       "img": "https://m.media-amazon.com/images/I/51IpzTj38RL._AC_SL1001_.jpg"
     },
     {
@@ -212,7 +212,7 @@ const jsonProducts = `[
       "price": 13.9,
       "off": 19,
       "refer_link": "https://amzn.to/3IHrg07",
-      "category": "accesories",
+      "category": "accessories",
       "img": "https://m.media-amazon.com/images/I/71fIFSXSjkL._AC_SL1500_.jpg"
     },
     {
@@ -221,7 +221,7 @@ const jsonProducts = `[
       "price": 16.5,
       "off": 3,
       "refer_link": "https://amzn.to/3tZaSUs",
-      "category": "accesories",
+      "category": "accessories",
       "img": "https://m.media-amazon.com/images/I/61bdLrTjVrL._AC_SL1500_.jpg"
     }
 ]`
