@@ -4,7 +4,7 @@ function cl(algo) {
 
 async function cargarJSON() {
     try {
-        const response = await fetch('./json/products.json');
+        const response = await fetch('./json/products.json'); // Asumiendo que los productos están en un archivo JSON
         if (!response.ok) throw new Error('Error al cargar los datos');
         return await response.json();
     } catch (error) {
@@ -34,6 +34,7 @@ function renderizarTarjetaProducto(elemento, producto) {
     } else {
         productoHtml += `<p>${producto.price} €</p>`;
     }
+
     productoHtml += `</div></div></a>
             <p class="add-to-cart" 
                 style="border:1px solid lightgray; padding:16px; text-align: center; font-size: 14px; cursor: pointer;"
@@ -65,16 +66,25 @@ function renderizarCarrito() {
         const li = document.createElement('li');
         li.className = 'cart-item';
         li.style.display = 'flex';
-        li.style.justifyContent = 'space-between';
+        li.style.flexDirection = 'column'; // Cambiar a columna para apilar elementos
         li.style.marginBottom = '10px';
         li.style.padding = '10px';
         li.style.border = '1px solid #e0e0e0';
         li.style.borderRadius = '5px';
         li.style.backgroundColor = '#f9f9f9';
-        li.innerHTML = `${item.title} - Cantidad: <span>${item.cantidad}</span>
-            <button onclick="cambiarCantidad(${index}, 1)">+</button>
-            <button onclick="cambiarCantidad(${index}, -1)">-</button>
-            <button onclick="eliminarDelCarrito(${index})">❌</button>`;
+        
+        // Estructura HTML
+        li.innerHTML = `
+            <span>${item.title}</span>
+            <div style="display: flex; align-items: center; margin-top: 5px;">
+                <span>Uni.: </span>
+                <input type="number" min="1" max="10" value="${item.cantidad}" onchange="cambiarCantidadManual(${index}, this.value)" style="width: 50px; margin: 0 10px;"/>
+                <button onclick="cambiarCantidad(${index}, 1)" style="padding: 5px 10px;">+</button>
+                <button onclick="cambiarCantidad(${index}, -1)" style="padding: 5px 10px;">-</button>
+                <button onclick="eliminarDelCarrito(${index})" style="padding: 5px 10px; margin-left: 10px;">❌</button> <!-- Añadido padding -->
+            </div>
+        `;
+
         cartItems.appendChild(li);
     });
 }
@@ -111,6 +121,15 @@ function cambiarCantidad(index, cambio) {
     renderizarCarrito();
 }
 
+function cambiarCantidadManual(index, cantidad) {
+    const item = carrito[index];
+    const nuevaCantidad = Math.max(1, Math.min(parseInt(cantidad), 10));
+    item.cantidad = nuevaCantidad;
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContador();
+    renderizarCarrito();
+}
+
 document.getElementById('cart-icon').addEventListener('click', () => {
     cartSidebar.classList.toggle('active');
     renderizarCarrito();
@@ -123,7 +142,13 @@ closeCart.addEventListener('click', () => {
 actualizarContador();
 
 async function main() {
-    const productos = await cargarJSON();
+    let productos;
+    try {
+        productos = await cargarJSON();
+    } catch (error) {
+        console.error(error.message);
+        return;
+    }
     const secciones = document.getElementsByClassName('section');
     const mapaCategorias = {
         teclados: "electric-keyboards",
