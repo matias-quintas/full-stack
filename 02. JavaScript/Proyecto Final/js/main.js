@@ -1,98 +1,164 @@
-function cl(something) {
-    console.log(something);
+function cl(algo) {
+    console.log(algo);
 }
 
-function chargeJSON() {
+function cargarJSON() {
     if (typeof jsonProducts !== 'undefined') {
         return JSON.parse(jsonProducts);
     }
-    throw new Error('jsonProducts is not defined');
+    throw new Error('jsonProducts no está definido');
 }
 
-function renderProductCard(element, product) {
-    let productHtml = `
+function renderizarTarjetaProducto(elemento, producto) {
+    let productoHtml = `
     <div class="card">
-        <a href="${product.refer_link}" target="_blank">
+        <a href="${producto.refer_link}" target="_blank">
             <div class="productImgBox">
-                <img src="${product.img}" alt="${product.title}">
+                <img src="${producto.img}" alt="${producto.title}">
             </div>
             <div class="productContent">
                 <div class="productTitle">
-                    <p>${product.title}</p>
+                    <p>${producto.title}</p>
                 </div>
                 <div class="productDesc">
-                    <p>${product.description}</p>
+                    <p>${producto.description}</p>
                 </div>
-                <div class="price">`; // Cierre de comillas corregido
+                <div class="price">`;
 
-    if (product.off > 0) {
-        productHtml += `
-                    <p><span class="final-price">${parseFloat(product.price).toFixed(2)} €</span> <span class="discount">${product.off}% OFF</span></p>`; // Formateo del precio
+    if (producto.off > 0) {
+        productoHtml += `
+                    <p><span class="final-price">${producto.price} €</span> <span class="discount">${producto.off}% OFF</span></p>`;
     } else {
-        productHtml += `
-                    <p>${parseFloat(product.price).toFixed(2)} €</p>`; // Formateo del precio
+        productoHtml += `
+                    <p>${producto.price} €</p>`;
     }
 
-    productHtml += `
+    productoHtml += `
                 </div>
             </div>
         </a>
+        <p class="add-to-cart" style="border:1px solid lightgray;padding:16px; text-align: center; font-size: 14px; cursor: pointer;" onclick="agregarAlCarrito(${JSON.stringify(producto).replace(/"/g, '&quot;')})">Añadir al carrito</p>
     </div>`;
 
-    if (element.lastElementChild) {
-        element.lastElementChild.innerHTML += productHtml;
+    if (elemento.lastElementChild) {
+        elemento.lastElementChild.innerHTML += productoHtml;
     } else {
-        console.error(`No lastElementChild found for section: ${element.id}`);
+        console.error(`No se encontró lastElementChild para la sección: ${elemento.id}`);
     }
 }
 
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+const cartCount = document.getElementById('cart-count');
+const cartItems = document.getElementById('cart-items');
+const cartSidebar = document.getElementById('cart-sidebar');
+const closeCart = document.getElementById('close-cart');
 
-function setupHamburgerMenu() {
-    const actionMenuButton = document.querySelector(".hbImg");
-    const navSection = document.querySelector(".menuMobile");
-    const actionExitButton = document.querySelector(".menuMobileContainer");
-
-    function mostrarNav() {
-        navSection.style.display = "block";
-    }
-
-    function closeNavBar() {
-        navSection.style.display = "none";
-    }
-
-    actionMenuButton.onclick = mostrarNav;
-    actionExitButton.onclick = closeNavBar;
+function actualizarContador() {
+    cartCount.textContent = carrito.reduce((total, item) => total + item.cantidad, 0);
 }
+
+function renderizarCarrito() {
+    cartItems.innerHTML = '';
+    carrito.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.className = 'cart-item';
+        li.style.display = 'flex';
+        li.style.justifyContent = 'space-between';
+        li.style.marginBottom = '10px';
+        li.style.padding = '10px';
+        li.style.border = '1px solid #e0e0e0';
+        li.style.borderRadius = '5px';
+        li.style.backgroundColor = '#f9f9f9';
+
+        li.innerHTML = `
+            ${item.title} - Cantidad: <span>${item.cantidad}</span>
+            <button onclick="cambiarCantidad(${index}, 1)">+</button>
+            <button onclick="cambiarCantidad(${index}, -1)">-</button>
+            <button onclick="eliminarDelCarrito(${index})">❌</button>
+        `;
+        cartItems.appendChild(li);
+    });
+}
+
+function agregarAlCarrito(producto) {
+    // Verificar si ya existe en el carrito
+    const existente = carrito.find(item => item.title === producto.title);
+    if (existente) {
+        // Incrementar cantidad si ya existe
+        existente.cantidad += 1;
+    } else {
+        // Verificar límite de productos diferentes en el carrito
+        if (carrito.length < 10) {
+            carrito.push({ ...producto, cantidad: 1 });
+        } else {
+            alert("No puedes agregar más de 10 productos diferentes al carrito.");
+            return; // Salir si ya hay 10 productos
+        }
+    }
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContador();
+    renderizarCarrito();
+}
+
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContador();
+    renderizarCarrito();
+}
+
+function cambiarCantidad(index, cambio) {
+    const item = carrito[index];
+    item.cantidad = Math.max(1, Math.min(item.cantidad + cambio, 10)); // Limitar la cantidad entre 1 y 10
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContador();
+    renderizarCarrito();
+}
+
+document.getElementById('cart-icon').addEventListener('click', () => {
+    cartSidebar.classList.toggle('active');
+    renderizarCarrito();
+});
+
+closeCart.addEventListener('click', () => {
+    cartSidebar.classList.remove('active');
+});
+
+actualizarContador();
 
 function main() {
-    let products;
+    let productos;
     try {
-        products = chargeJSON();
+        productos = cargarJSON();
     } catch (error) {
         console.error(error.message);
         return;
     }
-    const sections = document.getElementsByClassName('section');
-    const categoryMap = {
+
+    const secciones = document.getElementsByClassName('section');
+
+    const mapaCategorias = {
         teclados: "electric-keyboards",
         pianos: "electric-pianos",
         synthes: "synths",
         amplis: "amplis",
         extras: "accessories"
     };
-    for (const element of sections) {
-        const category = categoryMap[element.id];
-        if (!category) {
-            console.error(`Unknown section ID: ${element.id}`);
+
+    for (const elemento of secciones) {
+        const categoria = mapaCategorias[elemento.id];
+
+        if (!categoria) {
+            console.error(`ID de sección desconocido: ${elemento.id}`);
             continue;
         }
-        for (const product of products) {
-            if (product.category === category) {
-                renderProductCard(element, product);
+
+        for (const producto of productos) {
+            if (producto.category === categoria) {
+                renderizarTarjetaProducto(elemento, producto);
             }
         }
     }
-    setupHamburgerMenu();
 }
 
 main();

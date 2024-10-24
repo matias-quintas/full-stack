@@ -408,3 +408,45 @@ main {
   .ftrDesc .fColPosition, .ftr .ftrContent .ftrDesc .fDivSocial, .ftr .ftrContent .ftrDesc .fNav {
     display: flex;
     flex-direction: column; } }
+
+    .cart-icon {
+      cursor: pointer;
+      position: relative;
+  }
+  
+  .sidebar {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: white;
+    border-left: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto; /* Permitir scroll vertical */
+}
+
+.sidebar.active {
+    display: block;
+}
+  
+  .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .cart-item button {
+      cursor: pointer;
+  }
+
+  #cart-items{
+    display: flex;
+    flex-direction: column;
+  }
+
+.add-to-cart:hover {
+  background-color: lightgray;
+}
