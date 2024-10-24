@@ -2,43 +2,45 @@ function cl(algo) {
     console.log(algo);
 }
 
-function cargarJSON() {
-    if (typeof jsonProducts !== 'undefined') {
-        return JSON.parse(jsonProducts);
+async function cargarJSON() {
+    try {
+        const response = await fetch('./json/products.json');
+        if (!response.ok) throw new Error('Error al cargar los datos');
+        return await response.json();
+    } catch (error) {
+        console.error(error.message);
+        return [];
     }
-    throw new Error('jsonProducts no está definido');
 }
 
 function renderizarTarjetaProducto(elemento, producto) {
     let productoHtml = `
-    <div class="card">
-        <a href="${producto.refer_link}" target="_blank">
-            <div class="productImgBox">
-                <img src="${producto.img}" alt="${producto.title}">
-            </div>
-            <div class="productContent">
-                <div class="productTitle">
-                    <p>${producto.title}</p>
+        <div class="card">
+            <a href="${producto.refer_link}" target="_blank">
+                <div class="productImgBox">
+                    <img src="${producto.img}" alt="${producto.title}">
                 </div>
-                <div class="productDesc">
-                    <p>${producto.description}</p>
-                </div>
-                <div class="price">`;
+                <div class="productContent">
+                    <div class="productTitle">
+                        <p>${producto.title}</p>
+                    </div>
+                    <div class="productDesc">
+                        <p>${producto.description}</p>
+                    </div>
+                    <div class="price">`;
 
     if (producto.off > 0) {
-        productoHtml += `
-                    <p><span class="final-price">${producto.price} €</span> <span class="discount">${producto.off}% OFF</span></p>`;
+        productoHtml += `<p><span class="final-price">${producto.price} €</span> <span class="discount">${producto.off}% OFF</span></p>`;
     } else {
-        productoHtml += `
-                    <p>${producto.price} €</p>`;
+        productoHtml += `<p>${producto.price} €</p>`;
     }
-
-    productoHtml += `
-                </div>
-            </div>
-        </a>
-        <p class="add-to-cart" style="border:1px solid lightgray;padding:16px; text-align: center; font-size: 14px; cursor: pointer;" onclick="agregarAlCarrito(${JSON.stringify(producto).replace(/"/g, '&quot;')})">Añadir al carrito</p>
-    </div>`;
+    productoHtml += `</div></div></a>
+            <p class="add-to-cart" 
+                style="border:1px solid lightgray; padding:16px; text-align: center; font-size: 14px; cursor: pointer;"
+                onclick="agregarAlCarrito(${JSON.stringify(producto).replace(/"/g, '&quot;')})">
+                Añadir al carrito
+            </p>
+        </div>`;
 
     if (elemento.lastElementChild) {
         elemento.lastElementChild.innerHTML += productoHtml;
@@ -69,30 +71,24 @@ function renderizarCarrito() {
         li.style.border = '1px solid #e0e0e0';
         li.style.borderRadius = '5px';
         li.style.backgroundColor = '#f9f9f9';
-
-        li.innerHTML = `
-            ${item.title} - Cantidad: <span>${item.cantidad}</span>
+        li.innerHTML = `${item.title} - Cantidad: <span>${item.cantidad}</span>
             <button onclick="cambiarCantidad(${index}, 1)">+</button>
             <button onclick="cambiarCantidad(${index}, -1)">-</button>
-            <button onclick="eliminarDelCarrito(${index})">❌</button>
-        `;
+            <button onclick="eliminarDelCarrito(${index})">❌</button>`;
         cartItems.appendChild(li);
     });
 }
 
 function agregarAlCarrito(producto) {
-    // Verificar si ya existe en el carrito
     const existente = carrito.find(item => item.title === producto.title);
     if (existente) {
-        // Incrementar cantidad si ya existe
         existente.cantidad += 1;
     } else {
-        // Verificar límite de productos diferentes en el carrito
         if (carrito.length < 10) {
             carrito.push({ ...producto, cantidad: 1 });
         } else {
             alert("No puedes agregar más de 10 productos diferentes al carrito.");
-            return; // Salir si ya hay 10 productos
+            return;
         }
     }
     localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -109,7 +105,7 @@ function eliminarDelCarrito(index) {
 
 function cambiarCantidad(index, cambio) {
     const item = carrito[index];
-    item.cantidad = Math.max(1, Math.min(item.cantidad + cambio, 10)); // Limitar la cantidad entre 1 y 10
+    item.cantidad = Math.max(1, Math.min(item.cantidad + cambio, 10));
     localStorage.setItem('carrito', JSON.stringify(carrito));
     actualizarContador();
     renderizarCarrito();
@@ -126,17 +122,9 @@ closeCart.addEventListener('click', () => {
 
 actualizarContador();
 
-function main() {
-    let productos;
-    try {
-        productos = cargarJSON();
-    } catch (error) {
-        console.error(error.message);
-        return;
-    }
-
+async function main() {
+    const productos = await cargarJSON();
     const secciones = document.getElementsByClassName('section');
-
     const mapaCategorias = {
         teclados: "electric-keyboards",
         pianos: "electric-pianos",
@@ -147,12 +135,10 @@ function main() {
 
     for (const elemento of secciones) {
         const categoria = mapaCategorias[elemento.id];
-
         if (!categoria) {
             console.error(`ID de sección desconocido: ${elemento.id}`);
             continue;
         }
-
         for (const producto of productos) {
             if (producto.category === categoria) {
                 renderizarTarjetaProducto(elemento, producto);
