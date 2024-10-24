@@ -4,7 +4,7 @@ function cl(algo) {
 
 async function cargarJSON() {
     try {
-        const response = await fetch('./json/products.json'); // Asumiendo que los productos están en un archivo JSON
+        const response = await fetch('./json/products.json');
         if (!response.ok) throw new Error('Error al cargar los datos');
         return await response.json();
     } catch (error) {
@@ -66,14 +66,12 @@ function renderizarCarrito() {
         const li = document.createElement('li');
         li.className = 'cart-item';
         li.style.display = 'flex';
-        li.style.flexDirection = 'column'; // Cambiar a columna para apilar elementos
+        li.style.flexDirection = 'column';
         li.style.marginBottom = '10px';
         li.style.padding = '10px';
         li.style.border = '1px solid #e0e0e0';
         li.style.borderRadius = '5px';
         li.style.backgroundColor = '#f9f9f9';
-        
-        // Estructura HTML
         li.innerHTML = `
             <span>${item.title}</span>
             <div style="display: flex; align-items: center; margin-top: 5px;">
